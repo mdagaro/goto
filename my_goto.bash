@@ -7,6 +7,16 @@ GOTO_ERROR_CODE=0
 source "$HOME/scripts/goto/help.bash"
 source "$HOME/scripts/goto/main.bash"
 
+declare -A LOCATIONS
+if [ ${#LOCATIONS[@]} == 0 ]; then
+    touch $GOTO_FILE
+    # Read from FILE
+    while IFS= read -r line; do
+        vars=($line)
+        LOCATIONS[${vars[0]}]=${vars[1]}
+    done < $GOTO_FILE
+fi
+
 if [ $# -ge 1 ]; then
 
     # List aliases
@@ -23,6 +33,9 @@ if [ $# -ge 1 ]; then
     # Delete an existing alias
     elif [ "$1" == "delete" ]; then
         __goto_delete $2
+
+    elif [ "$1" == "refresh" ]; then
+        __goto_refresh $2
 
     # Go the location specified
     elif [ ${LOCATIONS["$1"]} ]; then

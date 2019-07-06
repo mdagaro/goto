@@ -14,8 +14,11 @@ __goto_list() {
         done | sort -n -k2
     elif [ $1 == "-h" ] || [ $1 == "--help" ]; then
         __goto_help list
+    elif [[ -v "LOCATIONS[$1]" ]]; then
+        printf "%s\n" "${LOCATIONS[$1]}"
     else
         __goto_error "invalid option $1"
+        GOTO_ERROR_CODE=1
     fi
 }
 
@@ -60,12 +63,32 @@ __goto_delete() {
     elif [ $1 == "--help" ] || [ $1 == "-h" ]; then
         __goto_help delete
     elif [[ -v "LOCATIONS[$1]" ]]; then
+        local OLD_LOC=LOCATIONS[$1]
         unset LOCATIONS[$1]
         __goto_update
         __update_autocomplete
+        echo "$1 (aliased to $OLD_LOC) successfully deleted"
     else
         __goto_error "could not find alias '$1'"
         GOTO_ERROR_CODE=1
     fi
 
+}
+
+__goto_refresh() {
+    if [ -z $1 ]; then
+        unset LOCATIONS
+        declare -A LOCATIONS
+        touch $GOTO_FILE
+        # Read from FILE
+        while IFS= read -r line; do
+            vars=($line)
+            LOCATIONS[${vars[0]}]=${vars[1]}
+        done < $GOTO_FILE
+        __update_autocomplete
+    elif [ $1 == "-h" ] || [ $1 == "--help" ]; then
+        __goto_help refresh
+    else
+        __goto_error "invalid option '$1'"
+    fi
 }

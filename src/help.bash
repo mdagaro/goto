@@ -19,6 +19,7 @@ __goto_print_long_help() {
     __goto_print_command "delete" "delete an alias"
     __goto_print_command "help" "view this help message"
     __goto_print_command "list" "list currently defined aliases"
+    __goto_print_command "refresh" "refresh goto based on file"
 
 }
 
@@ -42,6 +43,15 @@ __goto_print_list_help() {
     __goto_print_command "-h, --help" "display this help message"
 }
 
+__goto_print_refresh_help() {
+    echo "usage: goto refresh [--help]"
+    echo ""
+    echo "Refresh the locations based on the file in memory. Useful if you update goto in"
+    echo "a different terminal"
+    echo ""
+    __goto_print_command "-h, --help" "display this help message"
+}
+
 __goto_help() {
     case $1 in
         add)
@@ -58,6 +68,10 @@ __goto_help() {
             ;;
         long)
             __goto_print_long_help
+            ;;
+        refresh)
+            __goto_print_refresh_help
+            ;;
     esac
 
 }
