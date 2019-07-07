@@ -1,0 +1,34 @@
+= goto-refresh(1)
+
+== NAME
+
+goto-refresh - Refresh working aliases from file
+
+== SYNOPSIS
+
+*goto* refresh
+
+== DESCRIPTION
+
+Refresh the LOCATIONS associative array based on what is in the ~/scripts/.aliases file.
+This is useful if you add/delete an alias in one terminal and want to duplicate the result
+in an already running terminal.
+
+== OPTIONS
+*-h*::
+*--help*::
+    Prints this help message.
+
+== FILES
+*~/scripts/.aliases*::
+    Updates the LOCATIONS associative array based on this file.
+
+== AUTHOR
+
+Mateo D'Agaro <md52@rice.edu>
+
+== SEE ALSO
+*goto*(1)
+*goto-add*(1)
+*goto-delete*(1)
+*goto-list*(1)

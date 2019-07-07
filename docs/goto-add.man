@@ -1,0 +1,37 @@
+= goto-add(1)
+:doctype: manpage
+:manmanual: GOTO
+:mansource: GOTO
+
+== NAME
+
+goto-add - Add new alias
+
+== SYNOPSIS
+
+*goto add* <alias>
+
+== DESCRIPTION
+
+Alias the current working directory to <alias> and save it for future use.
+
+== OPTIONS
+
+*-h*::
+*--help*::
+    Print this help message.
+
+== FILES
+
+*~/scripts/.aliases*::
+    Update to contain new alias.
+
+== AUTHOR
+
+Mateo D'Agaro <md52@rice.edu>
+
+== SEE ALSO
+*goto*(1),
+*goto-delete*(1),a
+*goto-list*(1),
+*goto-refresh*(1).

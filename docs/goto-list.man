@@ -1,0 +1,33 @@
+= goto-list(1)
+:doctype: manpage
+:manmanual: GOTO
+:mansource: GOTO
+
+== NAME
+goto-list - List existing aliases
+
+== SYNOPSIS
+
+*goto* list
+
+== DESCRIPTION
+List the current alias sorted alphabetically along with their associated working directory.
+
+== OPTIONS
+*-h*::
+*--help*::
+    Prints this help message.
+
+== FILES
+*~/scripts/.aliases*::
+
+    Retrieves list from this file or from the 'LOCATION' associated array.
+
+== AUTHOR
+Mateo D'Agaro <md52@rice.edu>
+
+== SEE ALSO
+*goto*(1),
+*goto-add*(1),
+*goto-delete*(1),
+*goto-refresh*(1).

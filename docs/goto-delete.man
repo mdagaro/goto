@@ -1,0 +1,39 @@
+= goto-delete(1)
+:doctype: manpage
+:manmanual: GOTO
+:mansource: GOTO
+
+== NAME
+
+goto-delete - Delete existing alias
+
+== SYNOPSIS
+
+*goto delete* <alias>
+
+== DESCRIPTION
+
+Delete <alias>. The directory will be unaffected, just the alias will be
+deleted.
+
+== OPTIONS
+
+*-h*::
+*--help*::
+    Print this help message.
+
+== FILES
+
+*~/scripts/.aliases*::
+    Delete <alias> from this file.
+
+== AUTHOR
+
+Mateo D'Agaro <md52@rice.edu>
+
+== SEE ALSO
+
+goto[1]
+goto-add[1]
+goto-list[1]
+goto-refresh[1]a
