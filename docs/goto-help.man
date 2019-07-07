@@ -1,0 +1,41 @@
+= goto-help(1)
+:doctype: manpage
+:manmanual: GOTO
+:mansource: GOTO
+:author: Mateo D'Agaro
+:email: md52@rice.edu
+
+== NAME
+
+goto-help - Print more extensive help messages on different commands
+
+== SYNOPSIS
+
+*goto* help <command>
+
+== DESCRIPTION
+
+Find more helpful information on <command>. This entails printing the manpage
+and is used under the assumption that you installed the man pages.
+
+To install the man pages, run the following commands. You will need root
+permissions.
+------------
+> cd path/to/goto/docs
+> make install
+------------
+
+Following are the potential commands you can get more info out of.
+
+include::cmd-list.man[]
+
+== OPTIONS
+*-h*::
+*--help*::
+    Prints this help message.
+
+== AUTHOR
+{author} {email}
+
+== SEE ALSO
+*goto*(1)
