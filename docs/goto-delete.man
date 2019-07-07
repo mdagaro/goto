@@ -2,7 +2,6 @@
 :doctype: manpage
 :manmanual: GOTO
 :mansource: GOTO
-:author: Mateo D'Agaro
 :email: md52@rice.edu
 
 == NAME
@@ -30,7 +29,7 @@ deleted.
     Delete <alias> from this file.
 
 == AUTHOR
-{author} {email}
+Mateo D'Agaro {email}
 
 == SEE ALSO
 *goto*(1)

@@ -2,6 +2,7 @@
 :doctype: manpage
 :manmanual: GOTO
 :mansource: GOTO
+:email: md52@rice.edu
 
 == NAME
 
@@ -28,7 +29,7 @@ Alias the current working directory to <alias> and save it for future use.
 
 == AUTHOR
 
-Mateo D'Agaro <md52@rice.edu>
+Mateo D'Agaro {email}
 
 == SEE ALSO
 *goto*(1),

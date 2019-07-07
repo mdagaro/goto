@@ -2,7 +2,6 @@
 :doctype: manpage
 :manmanual: GOTO
 :mansource: GOTO
-:author: Mateo D'Agaro
 :email: md52@rice.edu
 
 == NAME
@@ -44,7 +43,7 @@ invalid command::
     The commands is not a valid alias or a *goto* command.
 
 == AUTHOR
-{author} {email}
+Mateo D'Agaro {email}
 
 == SEE ALSO
 *goto-add*(1)

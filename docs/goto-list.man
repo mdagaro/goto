@@ -2,7 +2,6 @@
 :doctype: manpage
 :manmanual: GOTO
 :mansource: GOTO
-:author: Mateo D'Agaro
 :email: md52@rice.edu
 
 == NAME
@@ -26,7 +25,7 @@ List the current alias sorted alphabetically along with their associated working
     Retrieves list from this file or from the 'LOCATION' associated array.
 
 == AUTHOR
-{author} {email}
+Mateo D'Agaro {email}
 
 == SEE ALSO
 *goto*(1),
