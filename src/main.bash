@@ -92,3 +92,27 @@ __goto_refresh() {
         __goto_error "invalid option '$1'"
     fi
 }
+
+__goto_help() {
+    if [ -z $1 ]; then
+        __goto_error "no command specified"
+    else
+        case $1 in
+            add)
+                man goto-add
+                ;;
+            delete)
+                man goto-delete
+                ;;
+            list)
+                man goto-list
+                ;;
+            refresh)
+                man goto-refresh
+                ;;
+            *)
+                __goto_error "invalid command '$1'"
+
+        esac
+    fi
+}

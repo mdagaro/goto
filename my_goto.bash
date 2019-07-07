@@ -23,8 +23,12 @@ if [ $# -ge 1 ]; then
     if [ "$1" == "list" ]; then
         __goto_list $2
 
-    elif [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ "$1" == "help" ]; then
+    elif [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
         __goto_print_long_help
+
+    # Print manpage help
+    elif [ "$1" == "help" ]; then
+        __goto_help $2
 
     # Add a new alias
     elif [ "$1" == "add" ]; then
