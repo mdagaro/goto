@@ -17,4 +17,4 @@ install: $(DOCS)
 .PHONY: all clean install
 
 clean:
-	rm -f $(DOCS)
+	rm -f *.1

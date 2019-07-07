@@ -1,4 +1,9 @@
 = goto-refresh(1)
+:doctype: manpage
+:manmanual: GOTO
+:mansource: GOTO
+:author: Mateo D'Agaro
+:email: md52@rice.edu
 
 == NAME
 
@@ -24,8 +29,7 @@ in an already running terminal.
     Updates the LOCATIONS associative array based on this file.
 
 == AUTHOR
-
-Mateo D'Agaro <md52@rice.edu>
+{author} {email}
 
 == SEE ALSO
 *goto*(1)

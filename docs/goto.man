@@ -2,6 +2,8 @@
 :doctype: manpage
 :manmanual: GOTO
 :mansource: GOTO
+:author: Mateo D'Agaro
+:email: md52@rice.edu
 
 == NAME
 
@@ -13,7 +15,28 @@ goto - Alias directories
 *goto* <command> [...]
 
 == DESCRIPTION
-*goto* is a handy shell script to quickly switch between directories through aliases. There are two main ways to use it. The first is to simply use the alias argument. This will change the working directory to whatever is specfied by alias. The other is to invoke a command. The current commands are *goto-add*(1), *goto-delete*(1), *goto-list*(1), and *goto-refresh*(1).
+
+*goto* is a handy shell script to quickly switch between directories through
+aliases. There are two main ways to use it. The first is to simply use the alias
+argument. This changes the current working directory to whatever is stored by
+<alias>. The other is to invoke a command.
+
+== COMMANDS
+
+*add*::
+    Add a new alias based on the current directory.
+
+*delete*::
+    Delete aliases you don't want anymore.
+
+*help*::
+    Find more extensive help messages on different commands.
+
+*list*::
+    List your current aliases.
+
+*refresh*::
+    Refresh your aliases based on a file.
 
 == OPTIONS
 
@@ -34,10 +57,10 @@ invalid command::
     The commands is not a valid alias or a *goto* command.
 
 == AUTHOR
-Mateo D'Agaro <md52@rice.edu>
+{author} {email}
 
 == SEE ALSO
-*goto-add*(1),
-*goto-delete*(1),
-*goto-list*(1),
-*goto-refresh*(1).
+*goto-add*(1)
+*goto-delete*(1)
+*goto-list*(1)
+*goto-refresh*(1)

@@ -2,6 +2,8 @@
 :doctype: manpage
 :manmanual: GOTO
 :mansource: GOTO
+:author: Mateo D'Agaro
+:email: md52@rice.edu
 
 == NAME
 goto-list - List existing aliases
@@ -24,7 +26,7 @@ List the current alias sorted alphabetically along with their associated working
     Retrieves list from this file or from the 'LOCATION' associated array.
 
 == AUTHOR
-Mateo D'Agaro <md52@rice.edu>
+{author} {email}
 
 == SEE ALSO
 *goto*(1),
