@@ -13,8 +13,8 @@ update: .make-update
 install: .make-install
 
 .make-update: $(DOCS)
-	for file in $@; do \
-		sudo cp "./$$file" /usr/local/share/man/man1/; \
+	for file in $?; do \
+		sudo cp "$$file" /usr/local/share/man/man1/; \
 	done
 	touch .make-update
 
