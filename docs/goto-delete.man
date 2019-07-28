@@ -39,4 +39,3 @@ Mateo D'Agaro {email}
 *goto*(1)
 *goto-add*(1)
 *goto-list*(1)
-*goto-refresh*(1)

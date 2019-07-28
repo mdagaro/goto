@@ -47,7 +47,6 @@ List the existing aliases.
 Mateo D'Agaro {email}
 
 == SEE ALSO
-*goto*(1),
-*goto-add*(1),
-*goto-delete*(1),
-*goto-refresh*(1).
+*goto*(1)
+*goto-add*(1)
+*goto-delete*(1)

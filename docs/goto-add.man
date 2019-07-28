@@ -10,7 +10,7 @@ goto-add - Add new alias
 
 == SYNOPSIS
 
-*goto add* [-h] [-p PATH] <alias> <path>
+*goto add* [-f] <alias> [path]
 
 == DESCRIPTION
 
@@ -18,9 +18,11 @@ Alias the the directory <path> to <alias> and save it for future use.
 
 == OPTIONS
 
-*-h*::
-*--help*::
-    show this help message and exit
+*-f*::
+*--force*::
+    Force creation of the symlink without prompting the user. This overrides
+    symlinks that already exist and won't warn you if your symlink is a
+    duplicate.
 
 == FILES
 
