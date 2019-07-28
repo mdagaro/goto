@@ -10,7 +10,7 @@ goto-delete - Delete existing alias
 
 == SYNOPSIS
 
-*goto delete* <alias>
+*goto delete* [-hf] <alias>
 
 == DESCRIPTION
 
@@ -23,10 +23,14 @@ deleted.
 *--help*::
     Print this help message.
 
+*-f*::
+*--force*::
+    Delete without confirmation.
+    
 == FILES
 
-*~/scripts/.aliases*::
-    Delete <alias> from this file.
+*GOTO_PATH/.goto*::
+    Remove alias from folder.
 
 == AUTHOR
 Mateo D'Agaro {email}

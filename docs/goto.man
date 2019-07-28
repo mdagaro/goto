@@ -22,18 +22,23 @@ argument. This changes the current working directory to whatever is stored by
 
 == COMMANDS
 
-include::cmd-list.man[]
+*add*::
+    Add and create a new alias.
+
+*delete*::
+    Delete an existing alias with confirmation.
+
+*get*::
+    Print out what an alias maps to.
+
+*list*::
+    List the aliases already created.
 
 == OPTIONS
 
 *-h*::
 *--help*::
     Prints this help message.
-
-== FILES
-
-*~/scripts/.aliases*::
-    Saves the aliases and their directory mappings.
 
 == DIAGNOSTICS
 

@@ -1,2 +1,9 @@
 # Man pages
 *.1
+
+# Python
+*.pyc
+__pycache__
+
+# Files
+.goto

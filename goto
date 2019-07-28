@@ -1,0 +1,21 @@
+#!/bin/bash
+
+case $1 in
+    add|list|delete|get)
+        $HOME/git/goto/src/goto.py $1 "${@:2}"
+        ;;
+    -h|--help)
+        $HOME/git/goto/src/goto.py $1 
+        ;;
+    *)
+        if [ -d "$GOTO_PATH/.goto/$1" ]; then
+            cd -P "$GOTO_PATH/.goto/$1"
+        elif [ "$1" = "show-all-if-ambiguous" ]; then
+            :
+        else
+            echo "goto: alias '$1' does not exist" 1>&2
+            return 1
+        fi
+        ;;
+esac
+

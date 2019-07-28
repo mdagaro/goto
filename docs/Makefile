@@ -1,4 +1,4 @@
-DOCS1 := goto.1 goto-add.1 goto-delete.1 goto-list.1 goto-refresh.1 goto-help.1
+DOCS1 := goto.1 goto-add.1 goto-delete.1 goto-list.1 goto-get.1
 DOCS := $(DOCS1)
 
 all: $(DOCS)

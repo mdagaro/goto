@@ -1,4 +1,4 @@
-= goto-add(1)
+= goto-get(1)
 :doctype: manpage
 :manmanual: GOTO
 :mansource: GOTO
@@ -6,26 +6,21 @@
 
 == NAME
 
-goto-add - Add new alias
+goto-get - Get path from alias
 
 == SYNOPSIS
 
-*goto add* [-h] [-p PATH] <alias> <path>
+*goto get* [-h] <alias>
 
 == DESCRIPTION
 
-Alias the the directory <path> to <alias> and save it for future use. 
+Print what <alias> maps to.
 
 == OPTIONS
 
 *-h*::
 *--help*::
     show this help message and exit
-
-== FILES
-
-*GOTO_PATH/.goto*::
-    Update to contain new alias.
 
 == AUTHOR
 
@@ -34,4 +29,4 @@ Mateo D'Agaro {email}
 == SEE ALSO
 *goto*(1),
 *goto-delete*(1),
-*goto-list*(1),
+*goto-list*(1)
