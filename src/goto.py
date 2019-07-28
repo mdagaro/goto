@@ -12,20 +12,51 @@ except Exception as e:
 GOTO.mkdir(exist_ok=True)
 
 
-class AliasNotExist(Exception):
-    pass
+class GotoException(Exception):
+    def __init__(self, string, exception=None):
+        self.error = string
+        self.exception = exception
+        super(GotoException, self).__init__(string)
 
 
-def add_alias(alias, path):
+def yes_no_handler(prompt):
+    while True:
+        x = input(prompt + " [y/n]: ")
+        if x.lower() not in ("y", "yes", "n", "no"):
+            print("Expected one of the following: y, yes, n, no")
+        else:
+            break
+    return x in ("y", "yes")
+
+
+def add_alias(alias, path, force):
     path = Path(path).absolute()
     link = GOTO / alias
     if link.exists():
+        if not force:
+            if not yes_no_handler(
+                "'%s' already aliased to '%s'. Override '%s'?"
+                % (alias, link.resolve(), alias)
+            ):
+                return
         link.unlink()
+    for x in GOTO.iterdir():
+        if x.resolve() == path:
+            if not yes_no_handler(
+                "Alias '%s' to '%s' already exists. Create '%s' anyways?"
+                % (x.stem, path, alias)
+            ):
+                return
     link.symlink_to(path, target_is_directory=True)
 
 
-def delete_alias(alias):
+def delete_alias(alias, force):
     alias_file = GOTO / alias
+    if not alias_file.exists():
+        raise GotoException("alias '%s' does not exist" % alias)
+    if force is False:
+        if not yes_no_handler("Delete '%s' aliased to '%s'?" % (alias, alias_file.resolve())):
+            return
     alias_file.unlink()
 
 
@@ -34,7 +65,7 @@ def get_alias(alias):
     if path.is_symlink():
         print(path.resolve())
     else:
-        raise Exception("alias '%s' does not exist" % alias)
+        raise GotoException("alias '%s' does not exist" % alias)
 
 
 def list_aliases(sort_by, number, subdirs, no_headers, aliases):
@@ -60,11 +91,11 @@ def list_aliases(sort_by, number, subdirs, no_headers, aliases):
 
 
 def add_helper(args):
-    add_alias(args.alias, os.path.abspath(args.path))
+    add_alias(args.alias, os.path.abspath(args.path), args.force)
 
 
 def delete_helper(args):
-    delete_alias(args.alias)
+    delete_alias(args.alias, args.force)
 
 
 def get_helper(args):
@@ -79,7 +110,13 @@ def list_helper(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="goto!")
+    parser = argparse.ArgumentParser(prog="goto", description="goto!")
+    parser.add_argument(
+        "-d",
+        "--debug",
+        action="store_true",
+        help="enter debug mode (only used if python file is called directly)",
+    )
     subparsers = parser.add_subparsers(help="commands")
 
     #
@@ -90,6 +127,12 @@ if __name__ == "__main__":
     add_parser.add_argument("alias", help="what to alias to")
     add_parser.add_argument(
         "path", nargs="?", help="path (default: current dir)", default="."
+    )
+    add_parser.add_argument(
+        "-f",
+        "--force",
+        action="store_true",
+        help="force creation of symlink without prompting",
     )
 
     #
@@ -144,6 +187,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     try:
         args.func(args)
-    except Exception as e:
-        print("goto: " + str(e), file=sys.stderr)
+    except GotoException as e:
+        if args.debug:
+            if e.exception is not None:
+                raise e.exception
+        else:
+            print("goto: " + str(e), file=sys.stderr)
         exit(1)
