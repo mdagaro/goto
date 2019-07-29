@@ -47,18 +47,18 @@ _get_ <alias>::
 _list_ [-an] [--no-headers] [-S PATH,ALIAS] [-s [SUBDIR]]::
     List your current aliases in different formats.
 
--n::::
+*-n*::::
     Prints the number of aliases. If other command line flags are used, print
     the number of aliases that satisfy those flags.
---no-headers::::
+*--no-headers*::::
     Don't print the headers at the top of the table.
--s, --subdirs [subdirs]::::
+*-s, --subdirs [subdirs]*::::
     Only print aliases that are subdirectories of subdirs. If subdirs is not
     provided, default to the current directory.
--S, --sort-by=[PATH|ALIAS]::::
+*-S, --sort-by=[PATH|ALIAS]*::::
     What the sort the output by, either by the path or by the alias (default:
     ALIAS).
--a, --aliases::::
+*-a, --aliases*::::
     List only the aliases, sorted by spaces.
 
 == DIAGNOSTICS
