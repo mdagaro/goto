@@ -55,7 +55,9 @@ def delete_alias(alias, force):
     if not alias_file.exists():
         raise GotoException("alias '%s' does not exist" % alias)
     if force is False:
-        if not yes_no_handler("Delete '%s' aliased to '%s'?" % (alias, alias_file.resolve())):
+        if not yes_no_handler(
+            "Delete '%s' aliased to '%s'?" % (alias, alias_file.resolve())
+        ):
             return
     alias_file.unlink()
 
