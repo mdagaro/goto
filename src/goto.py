@@ -74,7 +74,7 @@ def list_aliases(sort_by, number, subdirs, no_headers, aliases):
     if sort_by == "PATH":
         iterator = sorted(GOTO.iterdir(), key=lambda x: x.resolve())
     else:
-        iterator = GOTO.iterdir()
+        iterator = sorted(GOTO.iterdir(), key=lambda x: x.stem)
     count = 0
     if not number and not no_headers and not aliases:
         print("    %-15s %-15s" % ("ALIAS", "PATH"))
