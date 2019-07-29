@@ -10,35 +10,56 @@ goto - Alias directories
 
 == SYNOPSIS
 [verse]
-*goto* <alias>
-*goto* <command> [...]
+_goto_ <alias>
+_goto_ <command> [...]
 
 == DESCRIPTION
 
-*goto* is a handy shell script to quickly switch between directories through
+_goto_ is a handy shell script to quickly switch between directories through
 aliases. There are two main ways to use it. The first is to simply use the alias
 argument. This changes the current working directory to whatever is stored by
 <alias>. The other is to invoke a command.
 
 == COMMANDS
 
-*add*::
-    Add and create a new alias.
+_add_ [-f] <alias> [path]::
+    Alias the the directory path to <alias> and save it for future use. If the
+    <path> variable is not provided, default to the current working directory.
+    This will prompt you in two situations. The first is that you are overriding
+    an already existing alias. The second is that you already have an alias to
+    <path>. Use *-f, --force* option to disable those prompts.
 
-*delete*::
-    Delete an existing alias with confirmation.
+*-f, --force*::::
+    Force creation of the alias without prompting the user. This overrides
+    aliases that already exist and won't warn you if your path is a duplicate.
 
-*get*::
-    Print out what an alias maps to.
+_delete_ [-f] <alias>::
+    Delete an existing alias. This will through an error if the alias does not
+    exist. It will also prompt you to make sure that you want to delete the
+    alias. Use *-f, --force* option to disable those prompts.
 
-*list*::
-    List the aliases already created.
+*-f, --force*::::
+    Force deletion of the alias without prompting the user.
 
-== OPTIONS
+_get_ <alias>::
+    Print the absolute path of what the alias maps to.
 
-*-h*::
-*--help*::
-    Prints this help message.
+_list_ [-an] [--no-headers] [-S PATH,ALIAS] [-s [SUBDIR]]::
+    List your current aliases in different formats.
+
+-n::::
+    Prints the number of aliases. If other command line flags are used, print
+    the number of aliases that satisfy those flags.
+--no-headers::::
+    Don't print the headers at the top of the table.
+-s, --subdirs [subdirs]::::
+    Only print aliases that are subdirectories of subdirs. If subdirs is not
+    provided, default to the current directory.
+-S, --sort-by=[PATH|ALIAS]::::
+    What the sort the output by, either by the path or by the alias (default:
+    ALIAS).
+-a, --aliases::::
+    List only the aliases, sorted by spaces.
 
 == DIAGNOSTICS
 
@@ -50,8 +71,3 @@ invalid command::
 == AUTHOR
 Mateo D'Agaro {email}
 
-== SEE ALSO
-*goto-add*(1)
-*goto-delete*(1)
-*goto-list*(1)
-*goto-refresh*(1)
