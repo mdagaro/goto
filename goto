@@ -1,11 +1,15 @@
 #!/bin/bash
 
+if [ -z $GOTO_PATH ]; then
+    echo "goto: 'GOTO_PATH' is not defined" 1>&2
+    return 1
+fi
 case $1 in
     add|list|delete|get)
-        $HOME/git/goto/src/goto.py $1 "${@:2}"
+        $GOTO_PATH/src/goto.py $1 "${@:2}"
         ;;
     -h|--help)
-        $HOME/git/goto/src/goto.py $1 
+        $GOTO_PATH/src/goto.py $1 
         ;;
     *)
         if [ -d "$GOTO_PATH/.goto/$1" ]; then
