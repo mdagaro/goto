@@ -12,4 +12,14 @@ format:
 clean:
 	rm -rf *.pyc __pycache__
 
-.PHONY: all clean format
+install: all
+	sudo cp goto_complete.bash /etc/bash_completion.d/goto
+	sudo chmod 644 /etc/bash_completion.d/goto
+	touch goto_complete.bash
+
+uninstall: .delete_complete
+
+.delete_complete: 
+	sudo rm /etc/bash_completion.d/goto || true
+
+.PHONY: all clean format install uninstall

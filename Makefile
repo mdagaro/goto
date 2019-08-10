@@ -1,33 +1,45 @@
 DIRS := docs src
 CLEAN_DIRS := $(addsuffix .clean,$(DIRS))
 FORMAT_DIRS := $(addsuffix .format, src)
-INSTALL_DIRS := $(addsuffix .install, docs)
+INSTALL_DIRS := $(addsuffix .install, docs src)
+UNINSTALL_DIRS := $(addsuffix .uninstall, docs src)
+UPDATE_DIRS := $(addsuffix .update, docs)
 GOTO_ALIAS := "alias goto=\". $$GOTO_PATH/goto\""
 
-.PHONY: all clean format
-
-all: $(DIRS)
-
-clean: $(CLEAN_DIRS)
-
-install: all $(INSTALL_DIRS) /etc/bash_completion.d/goto
-
-format: $(FORMAT_DIRS)
 
 $(DIRS):
 	$(MAKE) -C $@
 
+all: $(DIRS)
+
+
 $(CLEAN_DIRS):
 	$(MAKE) -C $(basename $@) clean
+
+clean: $(CLEAN_DIRS)
+
 
 $(FORMAT_DIRS):
 	$(MAKE) -C $(basename $@) format
 
+format: $(FORMAT_DIRS)
+
+
 $(INSTALL_DIRS): 
 	$(MAKE) -C $(basename $@) install
 
-/etc/bash_completion.d/goto: src/goto_complete.bash
-	sudo cp ./src/goto_complete.bash /etc/bash_completion.d/goto
-	sudo chmod 644 /etc/bash_completion.d/goto
+install: $(INSTALL_DIRS) 
 
-.PHONY: all clean install format $(DIRS) $(CLEAN_DIRS) $(INSTALL_DIRS)
+
+$(UNINSTALL_DIRS): 
+	$(MAKE) -C $(basename $@) uninstall
+
+uninstall: $(UNINSTALL_DIRS)
+
+
+$(UPDATE_DIRS): 
+	$(MAKE) -C $(basename $@) update
+
+update: $(UPDATE_DIRS)
+
+.PHONY: all clean install format $(DIRS) $(CLEAN_DIRS) $(INSTALL_DIRS) $(UNINSTAL_DIRS) $(FORMAT_DIRS)  $(UPDATE_DIRS)
