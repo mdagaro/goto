@@ -2,8 +2,10 @@
 import os
 import sys
 import argparse
+from enum import Enum
 from pathlib import Path
 
+from typing import Optional, Union
 
 try:
     GOTO = Path(os.environ["GOTO_PATH"]) / ".goto"
@@ -13,13 +15,18 @@ GOTO.mkdir(exist_ok=True)
 
 
 class GotoException(Exception):
-    def __init__(self, string, exception=None):
+    def __init__(self, string: str, exception: Optional[Exception] = None):
         self.error = string
         self.exception = exception
         super(GotoException, self).__init__(string)
 
 
-def yes_no_handler(prompt):
+class SortBy(Enum):
+    PATH = "PATH"
+    ALIAS = "ALIAS"
+
+
+def yes_no_handler(prompt: str) -> bool:
     while True:
         x = input(prompt + " [y/n]: ")
         if x.lower() not in ("y", "yes", "n", "no"):
@@ -29,7 +36,7 @@ def yes_no_handler(prompt):
     return x in ("y", "yes")
 
 
-def add_alias(alias, path, force):
+def add_alias(alias: str, path: Union[str, Path], force: bool) -> None:
     path = Path(path).absolute()
     link = GOTO / alias
     if link.exists():
@@ -50,7 +57,7 @@ def add_alias(alias, path, force):
     link.symlink_to(path, target_is_directory=True)
 
 
-def delete_alias(alias, force):
+def delete_alias(alias: str, force: bool) -> None:
     alias_file = GOTO / alias
     if not alias_file.exists():
         raise GotoException("alias '%s' does not exist" % alias)
@@ -62,7 +69,7 @@ def delete_alias(alias, force):
     alias_file.unlink()
 
 
-def get_alias(alias):
+def get_alias(alias: str) -> None:
     path = GOTO / alias
     if path.is_symlink():
         print(path.resolve())
@@ -70,8 +77,14 @@ def get_alias(alias):
         raise GotoException("alias '%s' does not exist" % alias)
 
 
-def list_aliases(sort_by, number, subdirs, no_headers, aliases):
-    if sort_by == "PATH":
+def list_aliases(
+    sort_by: Union[SortBy, str],
+    number: bool,
+    subdirs: Path,
+    no_headers: bool,
+    aliases: bool,
+) -> None:
+    if sort_by == SortBy.PATH:
         iterator = sorted(GOTO.iterdir(), key=lambda x: x.resolve())
     else:
         iterator = sorted(GOTO.iterdir(), key=lambda x: x.stem)
@@ -92,23 +105,23 @@ def list_aliases(sort_by, number, subdirs, no_headers, aliases):
         print(count)
 
 
-def add_helper(args):
+def add_helper(args: argparse.Namespace) -> None:
     add_alias(args.alias, os.path.abspath(args.path), args.force)
 
 
-def delete_helper(args):
+def delete_helper(args: argparse.Namespace) -> None:
     delete_alias(args.alias, args.force)
 
 
-def get_helper(args):
+def get_helper(args: argparse.Namespace) -> None:
     get_alias(args.alias)
 
 
-def list_helper(args):
+def list_helper(args: argparse.Namespace) -> None:
     subdirs = os.path.abspath(args.subdirs[0])
-    list_aliases(
-        args.sort_by, args.number, Path(subdirs), args.no_headers, args.aliases
-    )
+    # Already checked that the arguments are valid
+    sort_by = SortBy(args.sort_by)
+    list_aliases(sort_by, args.number, Path(subdirs), args.no_headers, args.aliases)
 
 
 if __name__ == "__main__":
@@ -172,8 +185,8 @@ if __name__ == "__main__":
     list_parser.add_argument(
         "-S",
         "--sort-by",
-        choices=["PATH", "ALIAS"],
-        default="ALIAS",
+        choices=[e.value for e in SortBy],
+        default=SortBy.ALIAS.value,
         help="what to sort by (default: ALIAS)",
     )
     list_parser.add_argument(
