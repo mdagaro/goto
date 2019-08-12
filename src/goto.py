@@ -84,25 +84,23 @@ def list_aliases(
     no_headers: bool,
     aliases: bool,
 ) -> None:
+    if number:
+        print(sum(1 for i in GOTO.iterdir() if i.is_dir()))
+        return
     if SortBy(sort_by) == SortBy.PATH:
         iterator = sorted(GOTO.iterdir(), key=lambda x: x.resolve())
     else:
         iterator = sorted(GOTO.iterdir(), key=lambda x: x.stem)
-    count = 0
-    if not number and not no_headers and not aliases:
+    if not no_headers and not aliases:
         print("    %-15s %-15s" % ("ALIAS", "PATH"))
     for x in iterator:
         if x.is_dir():
             path = x.resolve()
             if subdirs in path.parents:
-                if number:
-                    count += 1
-                elif aliases:
+                if aliases:
                     print(x.stem, end=" ")
                 else:
                     print("    %-15s %-15s" % (x.stem, path))
-    if number:
-        print(count)
 
 
 def add_helper(args: argparse.Namespace) -> None:
