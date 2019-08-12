@@ -84,7 +84,7 @@ def list_aliases(
     no_headers: bool,
     aliases: bool,
 ) -> None:
-    if sort_by == SortBy.PATH:
+    if SortBy(sort_by) == SortBy.PATH:
         iterator = sorted(GOTO.iterdir(), key=lambda x: x.resolve())
     else:
         iterator = sorted(GOTO.iterdir(), key=lambda x: x.stem)
